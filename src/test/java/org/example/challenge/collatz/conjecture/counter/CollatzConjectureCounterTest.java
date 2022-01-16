@@ -1,10 +1,10 @@
-package org.example.challenge.cracking.digital.hash;
+package org.example.challenge.collatz.conjecture.counter;
 
 import org.junit.jupiter.api.Test;
 
 import static java.math.BigInteger.valueOf;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.example.challenge.cracking.digital.hash.CollatzConjectureCounter.countCollatzNumbers;
+import static org.example.challenge.collatz.conjecture.counter.CollatzConjectureCounter.countCollatzNumbers;
 
 class CollatzConjectureCounterTest {
     @Test

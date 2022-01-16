@@ -1,4 +1,4 @@
-package org.example.challenge.cracking.digital.hash;
+package org.example.challenge.collatz.conjecture.counter;
 
 import java.math.BigInteger;
 
