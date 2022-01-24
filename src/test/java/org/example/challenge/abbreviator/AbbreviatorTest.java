@@ -34,4 +34,9 @@ class AbbreviatorTest {
         assertThat(abbr.abbreviate("are-internationalization*love")).isEqualTo("are-i18n*l2e");
     }
 
+    @Test
+    public void should_not_evaluate_punctuation() {
+        assertThat(abbr.abbreviate("are, internationalization?")).isEqualTo("are, i18n?");
+    }
+
 }
