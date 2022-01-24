@@ -29,4 +29,9 @@ class AbbreviatorTest {
         assertThat(abbr.abbreviate("are internationalization love")).isEqualTo("are i18n l2e");
     }
 
+    @Test
+    public void should_abbreviate_composite_word() {
+        assertThat(abbr.abbreviate("are-internationalization*love")).isEqualTo("are-i18n*l2e");
+    }
+
 }
