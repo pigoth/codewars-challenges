@@ -16,12 +16,17 @@ class AbbreviatorTest {
 
     @Test
     public void should_not_abbreviate_word_longest_lessor_equal_than_3_chars() {
-        assertThat( abbr.abbreviate("are")).isEqualTo("are");
+        assertThat(abbr.abbreviate("are")).isEqualTo("are");
     }
 
     @Test
     public void should_abbreviate_word_longest_than_3_chars() {
-        assertThat( abbr.abbreviate("internationalization")).isEqualTo("i18n");
+        assertThat(abbr.abbreviate("internationalization")).isEqualTo("i18n");
+    }
+
+    @Test
+    public void should_abbreviate_a_phrase() {
+        assertThat(abbr.abbreviate("are internationalization love")).isEqualTo("are i18n l2e");
     }
 
 }
