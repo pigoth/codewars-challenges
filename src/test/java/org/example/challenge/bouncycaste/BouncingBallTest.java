@@ -23,6 +23,11 @@ public class BouncingBallTest {
         assertThat(BouncingBall.bouncingBall(1, 1, 0)).isEqualTo(-1);
     }
 
+    @Test
+    void should_return_negative_if_window_is_greater_than_height() {
+        assertThat(BouncingBall.bouncingBall(1, 0.9, 12)).isEqualTo(-1);
+    }
+
     @Disabled
     @Test
     public void test1() {
