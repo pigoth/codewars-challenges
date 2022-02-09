@@ -2,8 +2,17 @@ package org.example.challenge.bouncycaste;
 
 public class BouncingBall {
 
-    public static int bouncingBall(double h, double bounce, double window) {
-        if (h <= 0.0) return -1;
+    public static int bouncingBall(double height, double bounce, double window) {
+        if (invalidHeight(height) || invalidBounce(bounce)) return -1;
+
         return 0;
+    }
+
+    private static boolean invalidBounce(double bounce) {
+        return bounce <= 0.0 || bounce>=1.0;
+    }
+
+    private static boolean invalidHeight(double height) {
+        return height <= 0.0;
     }
 }

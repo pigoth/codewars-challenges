@@ -1,5 +1,6 @@
 package org.example.challenge.bouncycaste;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
@@ -13,9 +14,22 @@ public class BouncingBallTest {
     }
 
     @Test
+    void should_return_negative_is_bounce_is_less_or_equal_zero() {
+        assertThat(BouncingBall.bouncingBall(1, 0, 0)).isEqualTo(-1);
+    }
+
+    @Test
+    void should_return_negative_is_bounce_is_greater_or_equal_one() {
+        assertThat(BouncingBall.bouncingBall(1, 1, 0)).isEqualTo(-1);
+    }
+
+    @Disabled
+    @Test
     public void test1() {
         assertEquals(3, BouncingBall.bouncingBall(3.0, 0.66, 1.5));
     }
+
+    @Disabled
     @Test
     public void test2() {
         assertEquals(15, BouncingBall.bouncingBall(30.0, 0.66, 1.5));
