@@ -8,6 +8,7 @@ public class All {
     List<List<Tile>> allChain = new ArrayList<>();
 
     public void listChains(List<Tile> chain, List<Tile> list) {
+
         for (int i = 0; i < list.size(); ++i) {
             Tile dom = list.get(i);
             if (canAppend(dom, chain)) {
