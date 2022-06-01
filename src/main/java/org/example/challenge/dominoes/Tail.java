@@ -8,4 +8,28 @@ public class Tail {
         this.left = left;
         this.right = right;
     }
+
+    public boolean matchWith(Integer value) {
+        return left == value || right == value;
+    }
+
+    public Integer right() {
+        return right;
+    }
+
+    public Integer left() {
+        return left;
+    }
+
+    public boolean matchRight(Integer value) {
+        return right == value;
+    }
+
+    public boolean matchLeft(Integer value) {
+        return left == value;
+    }
+
+    public Tail reverse() {
+        return new Tail(right, left);
+    }
 }
