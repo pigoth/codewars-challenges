@@ -14,7 +14,19 @@ class ChainTest {
 
         List<List<Tile>> result = new Chains(tiles).all(it -> true);
 
-        assertThat(result).containsExactly(
+        assertThat(result).containsExactlyInAnyOrder(
+                List.of(new Tile(3, 4), new Tile(4, 6)),
+                List.of(new Tile(6, 4), new Tile(4, 3))
+        );
+    }
+
+    @Test
+    void should_create_all_chain_with_match_in_same_position() {
+        List<Tile> tiles = List.of(new Tile(3, 4), new Tile( 6, 4));
+
+        List<List<Tile>> result = new Chains(tiles).all(it -> true);
+
+        assertThat(result).containsExactlyInAnyOrder(
                 List.of(new Tile(3, 4), new Tile(4, 6)),
                 List.of(new Tile(6, 4), new Tile(4, 3))
         );
