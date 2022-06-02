@@ -60,6 +60,12 @@ class ChainsTest {
         assertThat(result).noneMatch(it -> it.contains(noMatchingValues));
     }
 
+    @Test
+    void should_filter_chain_by_condition() {
+        List<Tile> tiles = asList(Tile.of(3, 4), Tile.of(6, 4), Tile.of(1,2), Tile.of(1,2));
 
+        List<Chain> result = new Chains(tiles).all(chain -> chain.contains(Tile.of(3,4)));
 
+        assertThat(result).allMatch(it -> it.contains(Tile.of(3,4)));
+    }
 }

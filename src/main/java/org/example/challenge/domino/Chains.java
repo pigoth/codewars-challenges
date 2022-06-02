@@ -6,10 +6,15 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class Chains {
-    List<Chain> allChain = new ArrayList<>();
+    private final List<Chain> allChain;
 
     public Chains(List<Tile> tiles) {
+        allChain = new ArrayList<>();
         allChains(Chain.empty(), tiles);
+    }
+
+    public List<Chain> all(Predicate<? super Chain> condition) {
+        return allChain.stream().filter(condition).toList();
     }
 
     private void allChains(Chain chain, List<Tile> tiles) {
@@ -34,10 +39,6 @@ public class Chains {
         return new ArrayList<>(tiles) {{
             remove(i);
         }};
-    }
-
-    public List<Chain> all(Predicate<? super Chain> condition) {
-        return allChain.stream().filter(condition).toList();
     }
 
 }
