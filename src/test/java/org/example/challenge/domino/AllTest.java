@@ -1,10 +1,7 @@
 package org.example.challenge.domino;
 
-import org.assertj.core.util.Arrays;
-import org.example.challenge.dominoes.Tail;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,9 +21,8 @@ class AllTest {
                 new Tile(4, 6)
         );
 
-        All all = new All();
-        all.listChains(new ArrayList<>(), new ArrayList<>(list));
-        List<List<Tile>> result = all.allChain(head);
+        Chains chains = new Chains(list);
+        List<List<Tile>> result = chains.allWith(head);
 
         assertThat(result).allMatch(it -> it.contains(head));
         assertThat(result).hasSize(42);

@@ -4,21 +4,25 @@ package org.example.challenge.domino;
 import java.util.ArrayList;
 import java.util.List;
 
-public class All {
+public class Chains {
     List<List<Tile>> allChain = new ArrayList<>();
 
-    public void listChains(List<Tile> chain, List<Tile> tiles) {
+    public Chains(List<Tile> tiles) {
+        allChains(new ArrayList<>(), tiles);
+    }
+
+    private void allChains(List<Tile> chain, List<Tile> tiles) {
         for (int i = 0; i < tiles.size(); ++i) {
             final Tile dom = tiles.get(i);
             if (canAppend(dom, chain)) {
                 allChain.add(mergeTileInChain(chain, dom));
-                listChains(mergeTileInChain(chain, dom), removeCurrenFrom(tiles, i));
+                allChains(mergeTileInChain(chain, dom), removeCurrenFrom(tiles, i));
             }
 
             final Tile flipped = dom.flipped();
             if (canAppend(flipped, chain)) {
                 allChain.add(mergeTileInChain(chain, flipped));
-                listChains(mergeTileInChain(chain, flipped), removeCurrenFrom(tiles, i));
+                allChains(mergeTileInChain(chain, flipped), removeCurrenFrom(tiles, i));
             }
         }
     }
@@ -39,7 +43,7 @@ public class All {
         return to.isEmpty() || to.get(to.size() - 1).b == dom.a;
     }
 
-    public List<List<Tile>> allChain(Tile tile) {
+    public List<List<Tile>> allWith(Tile tile) {
         return allChain.stream()
                 .filter(it -> it.contains(tile) || it.contains(tile.flipped()))
                 .toList();
