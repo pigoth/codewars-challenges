@@ -5,16 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class Chains {
+public class Chains extends ArrayList<Chain> {
     private final List<Chain> allChain;
 
     public Chains(List<Tile> tiles) {
         allChain = new ArrayList<>();
         allChains(Chain.empty(), tiles);
-    }
-
-    public List<Chain> all(Predicate<? super Chain> condition) {
-        return allChain.stream().filter(condition).toList();
+        this.addAll(allChain);
     }
 
     private void allChains(Chain chain, List<Tile> tiles) {

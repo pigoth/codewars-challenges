@@ -14,9 +14,9 @@ class ChainsTest {
     void should_create_all_chain_with_min_size_as_two() {
         List<Tile> tiles = asList(Tile.of(3, 4), Tile.of(4, 6));
 
-        List<Chain> result = new Chains(tiles).all(it -> true);
+        List<Chain> chains = new Chains(tiles);
 
-        assertThat(result).containsExactlyInAnyOrder(
+        assertThat(chains).containsExactlyInAnyOrder(
                 Chain.of(Tile.of(3, 4), Tile.of(4, 6)),
                 Chain.of(Tile.of(6, 4), Tile.of(4, 3))
         );
@@ -26,9 +26,9 @@ class ChainsTest {
     void should_create_all_chain_with_match_in_same_position() {
         List<Tile> tiles = asList(Tile.of(3, 4), Tile.of(6, 4));
 
-        List<Chain> result = new Chains(tiles).all(it -> true);
+        List<Chain> chains = new Chains(tiles);
 
-        assertThat(result).containsExactlyInAnyOrder(
+        assertThat(chains).containsExactlyInAnyOrder(
                 Chain.of(Tile.of(3, 4), Tile.of(4, 6)),
                 Chain.of(Tile.of(6, 4), Tile.of(4, 3))
         );
@@ -38,9 +38,9 @@ class ChainsTest {
     void should_create_all_chain_with_almost_min_size() {
         List<Tile> tiles = asList(Tile.of(3, 4), Tile.of(6, 4), Tile.of(1, 6));
 
-        List<Chain> result = new Chains(tiles).all(it -> true);
+        List<Chain> chains = new Chains(tiles);
 
-        assertThat(result).containsExactlyInAnyOrder(
+        assertThat(chains).containsExactlyInAnyOrder(
                 Chain.of(Tile.of(3, 4), Tile.of(4, 6)),
                 Chain.of(Tile.of(3, 4), Tile.of(4, 6), Tile.of(6, 1)),
                 Chain.of(Tile.of(6, 4), Tile.of(4, 3)),
@@ -55,17 +55,9 @@ class ChainsTest {
         Tile noMatchingValues = Tile.of(1, 5);
         List<Tile> tiles = asList(Tile.of(3, 4), noMatchingValues, Tile.of(6, 4));
 
-        List<Chain> result = new Chains(tiles).all(it -> true);
+        Chains chains = new Chains(tiles);
 
-        assertThat(result).noneMatch(it -> it.contains(noMatchingValues));
+        assertThat(chains).noneMatch(it -> it.contains(noMatchingValues));
     }
 
-    @Test
-    void should_filter_chain_by_condition() {
-        List<Tile> tiles = asList(Tile.of(3, 4), Tile.of(6, 4), Tile.of(1,2), Tile.of(1,2));
-
-        List<Chain> result = new Chains(tiles).all(chain -> chain.contains(Tile.of(3,4)));
-
-        assertThat(result).allMatch(it -> it.contains(Tile.of(3,4)));
-    }
 }
