@@ -3,6 +3,7 @@ package org.example.challenge.domino;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class Chains {
     List<List<Tile>> allChain = new ArrayList<>();
@@ -15,14 +16,16 @@ public class Chains {
         for (int i = 0; i < tiles.size(); ++i) {
             final Tile dom = tiles.get(i);
             if (canAppend(dom, chain)) {
-                allChain.add(mergeTileInChain(chain, dom));
-                allChains(mergeTileInChain(chain, dom), removeCurrenFrom(tiles, i));
+                List<Tile> currentChain = mergeTileInChain(chain, dom);
+                if (currentChain.size() > 1) allChain.add(currentChain);
+                allChains(currentChain, removeCurrenFrom(tiles, i));
             }
 
             final Tile flipped = dom.flipped();
             if (canAppend(flipped, chain)) {
-                allChain.add(mergeTileInChain(chain, flipped));
-                allChains(mergeTileInChain(chain, flipped), removeCurrenFrom(tiles, i));
+                List<Tile> currentChain = mergeTileInChain(chain, flipped);
+                if (currentChain.size() > 1) allChain.add(currentChain);
+                allChains(currentChain, removeCurrenFrom(tiles, i));
             }
         }
     }
@@ -47,5 +50,9 @@ public class Chains {
         return allChain.stream()
                 .filter(it -> it.contains(tile) || it.contains(tile.flipped()))
                 .toList();
+    }
+
+    public List<List<Tile>> all(Predicate<? super List<Tile>> condition) {
+        return allChain.stream().filter(condition).toList();
     }
 }
