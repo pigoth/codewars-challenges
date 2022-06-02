@@ -21,7 +21,7 @@ public class Chains {
                 allChains(currentChain, removeCurrenFrom(tiles, i));
             }
 
-            final Tile flipped = dom.flipped();
+            final Tile flipped = dom.flip();
             if (canAppend(flipped, chain)) {
                 List<Tile> currentChain = mergeTileInChain(chain, flipped);
                 if (currentChain.size() > 1) allChain.add(currentChain);
@@ -43,12 +43,12 @@ public class Chains {
     }
 
     private boolean canAppend(Tile dom, List<Tile> to) {
-        return to.isEmpty() || to.get(to.size() - 1).b == dom.a;
+        return to.isEmpty() || to.get(to.size() - 1).right() == dom.left();
     }
 
     public List<List<Tile>> allWith(Tile tile) {
         return allChain.stream()
-                .filter(it -> it.contains(tile) || it.contains(tile.flipped()))
+                .filter(it -> it.contains(tile) || it.contains(tile.flip()))
                 .toList();
     }
 

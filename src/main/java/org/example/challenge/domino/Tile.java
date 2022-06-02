@@ -3,21 +3,33 @@ package org.example.challenge.domino;
 import java.util.Objects;
 
 public class Tile {
-    public final int a;
-    public final int b;
+    private final int left;
+    private final int right;
 
-    public Tile(int a, int b) {
-        this.a = a;
-        this.b = b;
+    public static Tile of(int left, int right) {
+        return new Tile(left, right);
     }
 
-    public Tile flipped() {
-        return new Tile(b, a);
+    private Tile(int left, int right) {
+        this.left = left;
+        this.right = right;
+    }
+
+    public int left() {
+        return left;
+    }
+
+    public int right() {
+        return right;
+    }
+
+    public Tile flip() {
+        return new Tile(right, left);
     }
 
     @Override
     public String toString() {
-        return "[" + a + "/" + b + "]";
+        return "[" + left + "/" + right + "]";
     }
 
     @Override
@@ -25,12 +37,12 @@ public class Tile {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Tile tile = (Tile) o;
-        return a == tile.a && b == tile.b;
+        return left == tile.left && right == tile.right;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(a, b);
+        return Objects.hash(left, right);
     }
 }
 
