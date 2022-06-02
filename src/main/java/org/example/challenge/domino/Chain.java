@@ -4,10 +4,13 @@ package org.example.challenge.domino;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.IntPredicate;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static java.util.Arrays.stream;
+import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.IntStream.range;
 import static java.util.stream.Stream.concat;
 
 public class Chain {
@@ -18,7 +21,7 @@ public class Chain {
     }
 
     public static Chain of(Tile... tiles) {
-        return new Chain(stream(tiles).toList());
+        return new Chain(asList(tiles));
     }
 
     private Chain() {
@@ -26,15 +29,19 @@ public class Chain {
     }
 
     private Chain(List<Tile> rings) {
+        IntPredicate invalidMatch = index -> index != 0 && rings.get(index - 1).right() != rings.get(index).left();
+        if(range(0, rings.size()).anyMatch(invalidMatch)) throw new RuntimeException("Tile not match");
+
         this.rings = rings;
     }
 
     public boolean canAppend(Tile tile) {
-        Tile last = lastTile();
-        return rings.isEmpty() || last.right() == tile.left();
+        return rings.isEmpty() || lastTile().right() == tile.left();
     }
 
     public Chain append(Tile tile) {
+        if (!canAppend(tile)) throw new RuntimeException("Tile not match");
+
         return new Chain(concat(rings.stream(), Stream.of(tile)).collect(toList()));
     }
 
