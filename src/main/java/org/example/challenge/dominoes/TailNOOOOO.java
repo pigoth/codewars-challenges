@@ -1,10 +1,10 @@
 package org.example.challenge.dominoes;
 
-public class Tail {
+public class TailNOOOOO {
     private final int left;
     private final int right;
 
-    public Tail(int left, int right) {
+    public TailNOOOOO(int left, int right) {
         this.left = left;
         this.right = right;
     }
@@ -29,7 +29,7 @@ public class Tail {
         return left == value;
     }
 
-    public Tail reverse() {
-        return new Tail(right, left);
+    public TailNOOOOO reverse() {
+        return new TailNOOOOO(right, left);
     }
 }

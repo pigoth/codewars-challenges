@@ -1,21 +1,19 @@
 package org.example.challenge.dominoes;
 
-import java.sql.ClientInfoStatus;
 import java.util.*;
-import java.util.stream.IntStream;
 
 public class Dominoes {
 
     private HashMap<String, Integer> chains = new HashMap<>();
 
-    private Tail start;
-    private List<Tail> tails;
+    private TailNOOOOO start;
+    private List<TailNOOOOO> tails;
 
-    public static Dominoes of(Tail start, List<Tail> tails) {
+    public static Dominoes of(TailNOOOOO start, List<TailNOOOOO> tails) {
         return new Dominoes(start, tails);
     }
 
-    private Dominoes(Tail start, List<Tail> tails) {
+    private Dominoes(TailNOOOOO start, List<TailNOOOOO> tails) {
         this.start = start;
         this.tails = tails;
     }
@@ -26,9 +24,9 @@ public class Dominoes {
         return chains.values().isEmpty() ? 0 : chains.values().stream().max(Integer::compareTo).get();
     }
 
-    private void branchWeight(Tail start, List<Tail> sequence) {
+    private void branchWeight(TailNOOOOO start, List<TailNOOOOO> sequence) {
         Integer value = start.right();
-        List<Tail> matched = sequence.stream()
+        List<TailNOOOOO> matched = sequence.stream()
                 .map(tail -> {
                     if (tail.matchLeft(value)) return tail;
                     else if (tail.matchRight(value)) return tail.reverse();
