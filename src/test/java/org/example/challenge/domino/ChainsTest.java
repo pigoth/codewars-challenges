@@ -2,9 +2,12 @@ package org.example.challenge.domino;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import static java.util.Arrays.asList;
+import static java.util.Comparator.comparing;
 import static java.util.List.of;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -60,4 +63,13 @@ class ChainsTest {
         assertThat(chains).noneMatch(it -> it.contains(noMatchingValues));
     }
 
+    @Test
+    void should_get_max_weight_chain() {
+        Chains chains = new Chains(Collections.emptyList()) {{
+            add(Chain.of(Tile.of(3, 4), Tile.of(4, 6)));
+            add(Chain.of(Tile.of(3, 4), Tile.of(4, 6), Tile.of(6,1)));
+        }};
+
+        assertThat(chains.stream().max(comparing(Chain::weight)).get()).isEqualTo(Chain.of(Tile.of(3, 4), Tile.of(4, 6), Tile.of(6,1)));
+    }
 }

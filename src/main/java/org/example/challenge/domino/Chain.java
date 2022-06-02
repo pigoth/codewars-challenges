@@ -4,6 +4,7 @@ package org.example.challenge.domino;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static java.util.Arrays.stream;
@@ -17,7 +18,7 @@ public class Chain {
         return new Chain();
     }
 
-    public  static Chain of(Tile ... tiles) {
+    public static Chain of(Tile... tiles) {
         return new Chain(stream(tiles).toList());
     }
 
@@ -30,7 +31,8 @@ public class Chain {
     }
 
     public boolean canAppend(Tile tile) {
-        return rings.isEmpty() || rings.get(rings.size() - 1).right() == tile.left();
+        Tile last = lastTile();
+        return rings.isEmpty() || last.right() == tile.left();
     }
 
     public Chain append(Tile tile) {
@@ -58,6 +60,16 @@ public class Chain {
         Chain chain = (Chain) o;
 
         return Objects.equals(rings, chain.rings);
+    }
+
+    public Integer weight() {
+        return rings.stream()
+                .mapToInt(Tile::right)
+                .sum() - lastTile().right();
+    }
+
+    private Tile lastTile() {
+        return rings.get(rings.size() - 1);
     }
 
 }
