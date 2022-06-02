@@ -60,27 +60,6 @@ class ChainsTest {
         assertThat(result).noneMatch(it -> it.contains(noMatchingValues));
     }
 
-//    @Test
-//    void name() {
-//        Tile head = Tile.of(4, 3);
-//        List<Tile> list = List.of(
-//                Tile.of(4, 6),
-//                Tile.of(1, 4),
-//                Tile.of(4, 9),
-//                Tile.of(10, 9),
-//                head,
-//                Tile.of(5, 4),
-//                Tile.of(1, 6),
-//                Tile.of(4, 6)
-//        );
-//
-//        Chains chains = new Chains(list);
-//        List<Chain> result = chains.allWith(head);
-//
-//        assertThat(result).allMatch(it -> it.contains(head));
-//        assertThat(result).hasSize(42);
-//
-//        result.forEach(System.out::println);
-//
-//    }
+
+
 }
