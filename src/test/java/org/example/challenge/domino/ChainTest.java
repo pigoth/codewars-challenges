@@ -32,6 +32,16 @@ class ChainTest {
         );
     }
 
+    @Test
+    void should_ignore_tiles_with_no_matching_values() {
+        Tile noMatchingValues = new Tile(1, 5);
+        List<Tile> tiles = List.of(new Tile(3, 4), noMatchingValues, new Tile( 6, 4));
+
+        List<List<Tile>> result = new Chains(tiles).all(it -> true);
+
+        assertThat(result).noneMatch(it -> it.contains(noMatchingValues));
+    }
+
 //    @Test
 //    void name() {
 //        Tile head = new Tile(4, 3);
