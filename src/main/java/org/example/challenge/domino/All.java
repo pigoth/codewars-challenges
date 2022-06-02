@@ -7,27 +7,32 @@ import java.util.List;
 public class All {
     List<List<Tile>> allChain = new ArrayList<>();
 
-    public void listChains(List<Tile> chain, List<Tile> list) {
-
-        for (int i = 0; i < list.size(); ++i) {
-            Tile dom = list.get(i);
+    public void listChains(List<Tile> chain, List<Tile> tiles) {
+        for (int i = 0; i < tiles.size(); ++i) {
+            final Tile dom = tiles.get(i);
             if (canAppend(dom, chain)) {
-                chain.add(dom);
-                allChain.add(List.copyOf(chain));
-                Tile saved = list.remove(i);
-                listChains(chain, list);
-                list.add(i, saved);
-                chain.remove(chain.size() - 1);
+                allChain.add(mergeTileInChain(chain, dom));
+                listChains(mergeTileInChain(chain, dom), removeCurrenFrom(tiles, i));
             }
-            dom = dom.flipped();
-            if (canAppend(dom, chain)) {
-                chain.add(dom);
-                Tile saved = list.remove(i);
-                listChains(chain, list);
-                list.add(i, saved);
-                chain.remove(chain.size() - 1);
+
+            final Tile flipped = dom.flipped();
+            if (canAppend(flipped, chain)) {
+                allChain.add(mergeTileInChain(chain, flipped));
+                listChains(mergeTileInChain(chain, flipped), removeCurrenFrom(tiles, i));
             }
         }
+    }
+
+    private List<Tile> removeCurrenFrom(List<Tile> tiles, int i) {
+        return new ArrayList<>(tiles) {{
+            remove(i);
+        }};
+    }
+
+    private List<Tile> mergeTileInChain(List<Tile> chain, Tile dom) {
+        return new ArrayList<>(chain) {{
+            add(dom);
+        }};
     }
 
     private boolean canAppend(Tile dom, List<Tile> to) {
