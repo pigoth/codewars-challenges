@@ -70,6 +70,8 @@ class ChainsTest {
             add(Chain.of(Tile.of(3, 4), Tile.of(4, 6), Tile.of(6,1)));
         }};
 
-        assertThat(chains.stream().max(comparing(Chain::weight)).get()).isEqualTo(Chain.of(Tile.of(3, 4), Tile.of(4, 6), Tile.of(6,1)));
+        assertThat(chains.stream().max(comparing(Chain::weight)).get()).isEqualTo(
+                Chain.of(Tile.of(3, 4), Tile.of(4, 6), Tile.of(6,1))
+        );
     }
 }
