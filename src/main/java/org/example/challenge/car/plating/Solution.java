@@ -2,10 +2,16 @@ package org.example.challenge.car.plating;
 
 import java.util.stream.Stream;
 
-public class Solution {
-    public static String findTheNumberPlate(int customerID) {
-        int value = customerID + 1;
+import static java.lang.String.valueOf;
 
-        return "aaa" + "0".repeat (3 - String.valueOf(value).length()) + value;
+public class Solution {
+
+
+    public static String findTheNumberPlate(int customerID) {
+        var firstChar = (char) ('a' + (customerID + 1 + (customerID / 999)) / 1000);
+        var numeric = (customerID + 1 + (customerID / 999)) % 1000;
+        var numericPrefix = "0".repeat(3 - valueOf(numeric).length());
+
+        return firstChar + "aa" + numericPrefix + numeric;
     }
 }
