@@ -16,8 +16,8 @@ class SolutionTest {
     }
 
     @Test
-    void should_move_first_char_to_next_when_customer_id_is_equal_or_over_999() {
-        assertThat(findTheNumberPlate(999)).isEqualTo("baa001");
+    void should_use_first_char_as_unit() {
+       assertThat(findTheNumberPlate(999)).isEqualTo("baa001");
         assertThat(findTheNumberPlate(1487)).isEqualTo("baa489");
         assertThat(findTheNumberPlate(1998)).isEqualTo("caa001");
         assertThat(findTheNumberPlate(24975)).isEqualTo("zaa001");
@@ -25,23 +25,15 @@ class SolutionTest {
     }
 
     @Test
-    void should_move_second_char_to_next_when_first_char_is_over() {
+    void should_use_second_char_as_decimal() {
         assertThat(findTheNumberPlate(24975 + 999)).isEqualTo("aba001");
-      //  assertThat(findTheNumberPlate(40000)).isEqualTo("oba041"); //(prima lettera 25 + o 14) + b1
-
-        for (int i = 0; i < 26; i++)
-        {
-            char lower = (char) ('a' + i);
-            System.out.println(lower + " - " + i);
-        }
+        assertThat(findTheNumberPlate(40000)).isEqualTo("oba041");
+        assertThat(findTheNumberPlate(234567)).isEqualTo("aja802");
     }
 
     @Test
-    @Disabled
-    public void test() {
-
+    public void should_use_third_char_as_hundred() {
         assertThat(findTheNumberPlate(17558423)).isEqualTo("zzz999");
-        assertThat(findTheNumberPlate(234567)).isEqualTo("aja802");
     }
 
 }

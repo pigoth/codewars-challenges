@@ -1,29 +1,21 @@
 package org.example.challenge.car.plating;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import static java.lang.String.join;
 import static java.lang.String.valueOf;
 
 public class Solution {
 
-
     public static String findTheNumberPlate(int customerID) {
-        int charIndex = (customerID + 1 + (customerID / 999)) / 1000;
-        System.out.println(charIndex);
+        var first = customerID / (26 * 26 * 999);
+        var second = (customerID % (26 * 26 * 999)) / (26 * 999);
+        var third = (customerID % (26 * 999)) / 999;
+        var number = customerID % 999;
 
-        var maxNumberFirstChar = 999 * 26;
-
-        var firstCharIndex = charIndex <= 25 ? charIndex : 0;
-        var firstChar = (char) ('a' + firstCharIndex);
-        var secondChar = (char) ('a' + (charIndex % 25));
-
-        return String.valueOf(firstChar) + String.valueOf(secondChar) + "a" + numericPlate(customerID);
-    }
-
-    private static String numericPlate(int customerID) {
-        var numeric = (customerID + 1 + (customerID / 999)) % 1000;
-        var numericPrefix = "0".repeat(3 - valueOf(numeric).length());
-
-        return numericPrefix + numeric;
+        return String.format("%c%c%c%03d", (char) (third + 'a'), (char) (second + 'a'), (char) (first + 'a'), 1 + number);
     }
 }
