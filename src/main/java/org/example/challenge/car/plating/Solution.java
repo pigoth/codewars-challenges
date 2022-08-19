@@ -1,13 +1,5 @@
 package org.example.challenge.car.plating;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
-
-import static java.lang.String.join;
-import static java.lang.String.valueOf;
-
 public class Solution {
 
     public static String findTheNumberPlate(int customerID) {
