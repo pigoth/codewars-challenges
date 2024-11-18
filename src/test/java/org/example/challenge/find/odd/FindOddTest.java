@@ -1,7 +1,6 @@
 package org.example.challenge.find.odd;
 
 import org.junit.jupiter.api.Test;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 class FindOddTest {
